@@ -4,10 +4,10 @@ from datetime import date
 import datetime
 
 DT_FIM = '05/07/2021'
-CONSUMER_KEY = 'qld2FYgfpcboIsqvdj2QUYFFaaa'
-CONSUMER_SECRET = 'gS2JR7fhPCpoiYh1OTTTSbiTUIWY3keTP3iNJv1jmPvlbIytDHqEEe'
-ACCESS_TOKEN = '13944628180412047377-c12XZlmDNomJRPrCfzJPhePhvUa1Lcc'
-ACESS_TOKEK_SECRET = 'C44gw4La1hWaebfrlXjBTKi2hhXYTa90BGw6NE0xlfO70PPp'
+CONSUMER_KEY = ''
+CONSUMER_SECRET = ''
+ACCESS_TOKEN = ''
+ACESS_TOKEK_SECRET = ''
 
 
 def conta_dias():
