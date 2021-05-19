@@ -46,7 +46,7 @@ while 1:
         api.update_status(text)
     except tweepy.TweepError as e:
         print(e.reason)
-    time.sleep(86400)
+    time.sleep(43200)
 
 
 
