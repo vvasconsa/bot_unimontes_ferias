@@ -28,25 +28,21 @@ def create_tweet():
     return y
 
 
-def hora_de_tweetar():
-    data_e_hora_atuais = datetime.datetime.now()
-    data_e_hora_em_texto = data_e_hora_atuais.strftime('%H:%M')
-    return data_e_hora_em_texto
+def main():
+    while 1:
+        text = create_tweet()
+        auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+        auth.set_access_token(ACCESS_TOKEN, ACESS_TOKEK_SECRET)
+        api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+        try:
+            api.update_status(text)
+        except tweepy.TweepError:
+            time.sleep(86400)
+        
 
 
-text = create_tweet()
-
-
-while 1:
-    print(text)
-    auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-    auth.set_access_token(ACCESS_TOKEN, ACESS_TOKEK_SECRET)
-    api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
-    try:
-        api.update_status(text)
-    except tweepy.TweepError as e:
-        print(e.reason)
-    time.sleep(43200)
+if __name__ == '__main__':
+    main()
 
 
 
