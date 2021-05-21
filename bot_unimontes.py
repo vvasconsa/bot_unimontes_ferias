@@ -1,7 +1,7 @@
 import time
 import tweepy
-from datetime import date
 import datetime
+from pytz import timezone
 
 DT_FIM = '05/07/2021'
 CONSUMER_KEY = ''
@@ -11,8 +11,10 @@ ACESS_TOKEK_SECRET = ''
 
 
 def conta_dias():
-    data_atual = date.today()
-    data_em_texto = data_atual.strftime('%d/%m/%Y')
+    data_atual = datetime.datetime.now()
+    fuso = timezone('America/Sao_Paulo')
+    data_atual_com_fuso = data_atual.astimezone(fuso)
+    data_em_texto = data_atual_com_fuso.strftime('%d/%m/%Y')
     date1 = datetime.datetime.strptime(data_em_texto, '%d/%m/%Y')
     date2 = datetime.datetime.strptime(DT_FIM, '%d/%m/%Y')
     quantidade_dias = abs((date2 - date1).days)
@@ -29,6 +31,7 @@ def create_tweet():
 
 
 def main():
+    sleep = int(86400)
     while 1:
         text = create_tweet()
         auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
@@ -36,14 +39,16 @@ def main():
         api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
         try:
             api.update_status(text)
-        except tweepy.TweepError:
-            time.sleep(86400)
-        
+            # print(text)
+            # print(datetime.datetime.now())
+        except tweepy.TweepError as e:
+            print(f'Erro: {e}')
+
+        time.sleep(sleep)
 
 
 if __name__ == '__main__':
     main()
-
 
 
 
